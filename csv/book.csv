@@ -1,0 +1,67 @@
+book,name,order,testament,chap_count
+genesis,Genesis,1,old,50
+exodus,Exodus,2,old,40
+leviticus,Leviticus,3,old,27
+numbers,Numbers,4,old,36
+deuteronomy,Deuteronomy,5,old,34
+joshua,Joshua,6,old,24
+judges,Judges,7,old,21
+ruth,Ruth,8,old,4
+1_samuel,1 Samuel,9,old,31
+2_samuel,2 Samuel,10,old,24
+1_kings,1 Kings,11,old,22
+2_kings,2 Kings,12,old,25
+1_chronicles,1 Chronicles,13,old,29
+2_chronicles,2 Chronicles,14,old,36
+ezra,Ezra,15,old,10
+nehemiah,Nehemiah,16,old,13
+esther,Esther,17,old,10
+job,Job,18,old,42
+psalms,Psalms,19,old,150
+proverbs,Proverbs,20,old,31
+ecclesiastes,Ecclesiastes,21,old,12
+song_of_solomon,Song of Solomon,22,old,8
+isaiah,Isaiah,23,old,66
+jeremiah,Jeremiah,24,old,52
+lamentations,Lamentations,25,old,5
+ezekiel,Ezekiel,26,old,48
+daniel,Daniel,27,old,12
+hosea,Hosea,28,old,14
+joel,Joel,29,old,3
+amos,Amos,30,old,9
+obadiah,Obadiah,31,old,1
+jonah,Jonah,32,old,4
+micah,Micah,33,old,7
+nahum,Nahum,34,old,3
+habakkuk,Habakkuk,35,old,3
+zephaniah,Zephaniah,36,old,3
+haggai,Haggai,37,old,2
+zechariah,Zechariah,38,old,14
+malachi,Malachi,39,old,4
+matthew,Matthew,40,new,28
+mark,Mark,41,new,16
+luke,Luke,42,new,24
+john,John,43,new,21
+acts,Acts,44,new,28
+romans,Romans,45,new,16
+1_corinthians,1 Corinthians,46,new,16
+2_corinthians,2 Corinthians,47,new,13
+galatians,Galatians,48,new,6
+ephesians,Ephesians,49,new,6
+philippians,Philippians,50,new,4
+colossians,Colossians,51,new,4
+1_thessalonians,1 Thessalonians,52,new,5
+2_thessalonians,2 Thessalonians,53,new,3
+1_timothy,1 Timothy,54,new,6
+2_timothy,2 Timothy,55,new,6
+titus,Titus,56,new,3
+philemon,Philemon,57,new,1
+hebrews,Hebrews,58,new,13
+james,James,59,new,5
+1_peter,1 Peter,60,new,5
+2_peter,2 Peter,61,new,3
+1_john,1 John,62,new,5
+2_john,2 John,63,new,1
+3_john,3 John,64,new,1
+jude,Jude,65,new,1
+revelation,Revelation,66,new,22
