@@ -8,7 +8,7 @@ CSV_PATH = 'csv'
 
 def getCommands():
     for root, dirs, files in walk(CSV_PATH):
-        for filename in files:
+        for filename in sorted(files):
             path = abspath(join(root, filename))
             table_name = filename.split('.')[0]
             yield "copy {} from '{}' delimiter ',' csv header;".format(

@@ -3,12 +3,6 @@ from itertools import cycle
 from lib.tag import Tag as t
 from json import dumps as json_encode
 
-from bokeh.charts import Donut, show, output_file, Bar
-from bokeh.charts.utils import df_from_json
-from bokeh.sampledata.olympics2014 import data
-from bokeh.embed import file_html
-from bokeh.embed import components
-
 import pandas as pd
 
 COLORS = ['black', 'grey', 'red']
@@ -80,13 +74,13 @@ def getPage(content, barval=None):
                     'taproot'
                     ),
                 t.link(rel='stylesheet', href='/s/flex.css'),
-                t.link(rel='stylesheet', href='/s/awesomplete.css'),
                 t.link(rel='stylesheet', href='/s/tr.css'),
                 t.link(rel='shortcut icon', href='/s/favicon.ico'),
                 t.script(src='/s/Chart.min.js'),
                 t.script(src='/s/jquery-2.2.3.min.js'),
-                t.script(src='/s/awesomplete.min.js'),
                 t.script(src='/s/tr.js'),
+                t.meta(_name='viewport',
+                    content='width=device-width, initial-scale=0.8',),
                 ),
             t.body(
                 getBar(),
@@ -175,40 +169,63 @@ def get_word_chart(word_stats):
                         background-color:{};
                         '''.format(colors.next()),
                     ),
-                t.div(str(row.use_count), _class='tight', _style='width:5em;'),
+                t.div(str(row.use_count), _class='tight', _style='width:3em;'),
                 _class='flex-row center',
                 )
     def getChart():
         def getData():
-            def getDicts():
-                colors = cycle(COLORS)
+            # def get():
+            #     colors = cycle(COLORS)
+            #     for i, row in df.iterrows():
+            #         yield dict(
+            #             value=row.use_count,
+            #             label=row.text,
+            #             color=colors.next(),
+            #             )
+            # return list(getDicts())
+            def getLabels():
                 for i, row in df.iterrows():
-                    yield dict(
-                        value=row.use_count,
-                        label=row.text,
-                        color=colors.next(),
-                        )
-            return list(getDicts())
+                    yield row.text
+            def getDataset():
+                def _getData():
+                    for i, row in df.iterrows():
+                        yield row.use_count
+                def getBackgroundColor():
+                    colors = cycle(COLORS)
+                    for i, row in df.iterrows():
+                        yield colors.next()
+                return dict(
+                    data=list(_getData()),
+                    backgroundColor=list(getBackgroundColor()),
+                    )
+            return dict(
+                labels=list(getLabels()),
+                datasets=[getDataset()],
+                )
         def getOptions():
             return dict(
                 responsive=True,
                 )
-        return t._(
+        return t.div(
             t.canvas(id='pie'),
             t.script('''
+                Chart.defaults.global.legend = false;
                 var ctx = document.getElementById("pie").getContext("2d");
-                var myDoughnutChart = new Chart(ctx).Doughnut(
-                    {},
-                    {});
+                var myDoughnutChart = new Chart(ctx, {{
+                    type: 'doughnut',
+                    data: {},
+                    options: {}
+                }});
                 '''.format(
                     json_encode(getData()),
                     json_encode(getOptions()),
                     )),
+            _class='flex-container',
             )
     return t.div(
         t.div(
             getWords(),
-            _style='margin-right: 1em',
+            # _style='margin-right: 1em',
             _class='tight',
             ),
         t.div(
@@ -246,8 +263,10 @@ def strongs(strong, word_stats, verses):
                     t.div(strong.lemma, _class='tr_head fg_deemp'),
                     _class='tight',
                     ),
-                t.div(_style='min-width: 3em;'),
-                t.div(strong.description, _class='flex-row wrap tight'),
+                t.div(_style='min-width: 3em; position:relative', _class='tight'),
+                t.div(
+                    t.div(strong.description, style='width:10em;',),
+                    _class='flex-row'),
                 _class='flex-row',
                 ),
             t.div(get_word_chart(word_stats), _style='margin-bottom:1em;'),

@@ -1,6 +1,9 @@
 from psycopg2 import connect
 from collections import namedtuple
 import time
+from config import DBNAME
+from config import DB_USER
+from config import DB_PASSWORD
 
 def timeit(f):
 
@@ -17,7 +20,8 @@ def timeit(f):
     return timed
 
 def _getConnection():
-    return connect("dbname='cg' user='cg' host='localhost' password=''")
+    return connect("dbname='{}' user='{}' host='localhost' password='{}'".format(
+        DBNAME, DB_USER, DB_PASSWORD))
 
 cnn = _getConnection()
 
@@ -29,12 +33,14 @@ def getConnection():
     assert cnn.closed == 0
     return cnn
 
+@timeit
 def sql_execute(sql, params=None):
     cnn = getConnection()
     with cnn.cursor() as cur:
         cur.execute(sql)
         cnn.commit()
 
+@timeit
 def sql_select(sql, params=None):
     cnn = getConnection()
     def yieldRows():

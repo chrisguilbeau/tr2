@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from lib.flask import app
 import c
 

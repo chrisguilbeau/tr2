@@ -118,7 +118,7 @@ word = TrTable(
             name='book_id',
             type='text',
             constraints=[
-                Constraint.foreign_key('book', 'book_id'),
+                # Constraint.foreign_key('book', 'book_id'),
                 ],
             ),
         Column(
