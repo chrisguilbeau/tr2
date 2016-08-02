@@ -39,7 +39,7 @@ def get_word_stats(strongs_id):
 
 def get_words(book, chap):
     sql = '''
-        select *
+        select distinct *
         from word
         where book_id = %s
         and chapter = %s
@@ -50,7 +50,7 @@ def get_words(book, chap):
 
 def get_verse_refs(strongs_id):
     sql = '''
-        select book_id, name, chapter, verse from (
+        select distinct book_id, name, chapter, verse from (
             select
                 b.order,
                 b.book_id,

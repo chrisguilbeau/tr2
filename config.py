@@ -1,3 +1,3 @@
-DBNAME = 'cg'
+DBNAME = 'tr2'
 DB_USER = 'postgres'
-DB_PASSWORD = 'cg'
+DB_PASSWORD = 'tr2'
