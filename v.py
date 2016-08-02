@@ -174,15 +174,6 @@ def get_word_chart(word_stats):
                 )
     def getChart():
         def getData():
-            # def get():
-            #     colors = cycle(COLORS)
-            #     for i, row in df.iterrows():
-            #         yield dict(
-            #             value=row.use_count,
-            #             label=row.text,
-            #             color=colors.next(),
-            #             )
-            # return list(getDicts())
             def getLabels():
                 for i, row in df.iterrows():
                     yield row.text
@@ -204,10 +195,12 @@ def get_word_chart(word_stats):
                 )
         def getOptions():
             return dict(
-                responsive=True,
+                responsive=False,
                 )
         return t.div(
-            t.canvas(id='pie'),
+            t.div(),
+            t.canvas(id='pie', _class='tight', style='max-height: 15em;'),
+            t.div(),
             t.script('''
                 Chart.defaults.global.legend = false;
                 var ctx = document.getElementById("pie").getContext("2d");
@@ -220,7 +213,8 @@ def get_word_chart(word_stats):
                     json_encode(getData()),
                     json_encode(getOptions()),
                     )),
-            _class='flex-container',
+            _style='min-height: 15em;',
+            _class='flex-row center',
             )
     return t.div(
         t.div(
@@ -238,7 +232,6 @@ def get_word_chart(word_stats):
 
 def strongs(strong, word_stats, verses):
     def get_verse_links():
-        last_book = None
         strongs_id = strong.strongs_id
         for book, words in sorted(verses.iteritems(), key=lambda a: a[0][0]):
             order, book_id, name, chap, verse = book
@@ -253,8 +246,17 @@ def strongs(strong, word_stats, verses):
                         yield t.b(word.text)
                     else:
                         yield word.text
-                    yield '&nbsp;'
+                    yield ' '
             yield t.div(getItems(), _style='margin-bottom: 1em;')
+    # return getPage(
+    #     content=t.div(
+    #         t.div('defs'),
+    #         t.div('vis'),
+    #         t.seq(get_verse_links()),
+    #         _style='border: 1px solid blue',
+    #         _class='flex-col stretch',
+    #         ),
+    #     )
     return getPage(
         content=t.div(
             t.div(
